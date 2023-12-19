@@ -20,7 +20,7 @@ function Login() {
                         <span></span>
                         <span></span>
                         <span></span>
-                        Sign in
+                        Log in
                     </a>
                     <a href="#" className='btn mt-4'>
                         <span></span>
