@@ -8,7 +8,10 @@ export const useLoginForm = () => {
         password: '',
     });
 
-    const [isValidEmail, setIsValidEmail] = useState(true);
+    const [emailValidation, setEmailValidation] = useState({
+        isValid: true,
+        message: '',
+    });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -19,7 +22,11 @@ export const useLoginForm = () => {
 
         // Check email validity when the email input changes
         if (name === 'email') {
-            setIsValidEmail(validateEmail(value));
+            const isValid = validateEmailRegex(value);
+            setEmailValidation({
+                isValid,
+                message: isValid ? 'Valid email' : 'Invalid email',
+            });
         }
     };
 
@@ -27,7 +34,7 @@ export const useLoginForm = () => {
         e.preventDefault();
 
         // Check email validity before proceeding with login
-        if (!isValidEmail) {
+        if (!emailValidation.isValid) {
             console.log('Invalid email address');
             return;
         }
@@ -37,10 +44,10 @@ export const useLoginForm = () => {
     };
 
     // Email validation function using a simple regex
-    const validateEmail = (email: string) => {
+    const validateEmailRegex = (email: string) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     };
 
-    return { loginInfo, isValidEmail, handleInputChange, handleLogIn };
+    return { loginInfo, emailValidation, handleInputChange, handleLogIn };
 };

@@ -1,9 +1,11 @@
+// Login.tsx
+
 import React from 'react';
 import "../styles/style.css";
 import { useLoginForm } from '../scripts/loginUtils/logInUtils';
 
 function Login() {
-    const { loginInfo, handleInputChange, handleLogIn } = useLoginForm();
+    const { loginInfo, emailValidation, handleInputChange, handleLogIn } = useLoginForm();
 
     return (
         <>
@@ -16,6 +18,10 @@ function Login() {
                             name='email'
                             value={loginInfo.email}
                             onChange={handleInputChange}
+                            style={{
+                                borderBottom: `1px solid ${emailValidation.isValid ? 'green' : 'red'}`,
+                                color: emailValidation.isValid ? 'green' : 'red',
+                            }}
                             required
                         ></input>
                         <label>Email</label>
@@ -26,6 +32,9 @@ function Login() {
                             name='password'
                             value={loginInfo.password}
                             onChange={handleInputChange}
+                            style={{
+                                borderBottom: '1px solid black', // Customize the styling for the password field
+                            }}
                             required
                         ></input>
                         <label>Password</label>
