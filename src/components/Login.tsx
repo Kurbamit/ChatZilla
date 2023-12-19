@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../styles/style.css";
 import { useLoginForm } from '../scripts/loginUtils/logInUtils';
 
 function Login() {
-    const { loginInfo, handleInputChange, handleSignIn } = useLoginForm();
+    const { loginInfo, handleInputChange, handleLogIn } = useLoginForm();
 
     return (
         <>
@@ -13,12 +13,12 @@ function Login() {
                     <div className='input-field'>
                         <input
                             type='text'
-                            name='emailOrUsername'
-                            value={loginInfo.emailOrUsername}
+                            name='email'
+                            value={loginInfo.email}
                             onChange={handleInputChange}
                             required
                         ></input>
-                        <label>Email or username</label>
+                        <label>Email</label>
                     </div>
                     <div className='input-field'>
                         <input
@@ -30,7 +30,7 @@ function Login() {
                         ></input>
                         <label>Password</label>
                     </div>
-                    <button className='btn mt-4' onClick={handleSignIn}>
+                    <button className='btn mt-4' onClick={handleLogIn}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -38,6 +38,7 @@ function Login() {
                         Log in
                     </button>
                     {/* Add Sign Up button and other elements as needed */}
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="#" className='btn mt-4'>
                         <span></span>
                         <span></span>
