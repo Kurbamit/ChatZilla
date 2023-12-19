@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Login from './components/Login';
+import RouterComponent from './components/Router';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Login />
+    <RouterComponent />
   </React.StrictMode>
 );
