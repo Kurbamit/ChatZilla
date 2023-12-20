@@ -1,4 +1,5 @@
 import React from "react";
+import SignupButtonClick from '../scripts/SignupValidation';
 import "../styles/style.css";
 
 function Signup() {
@@ -32,7 +33,7 @@ function Signup() {
                         <div id="repeat-password-error" className="error-message"></div>
                     </div>
                     <div className="create-acc-btn">
-                        <a href="#" className="btn mt-4" id="create-account-button">
+                        <a href="#" className="btn mt-4" id="create-account-button" onClick={SignupButtonClick}>
                             Create account
                         </a>
                     </div>
