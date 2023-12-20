@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import RouterComponent from './components/Router';
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDd6Q5TJeR0Wa1KtLXq9-DUbZhMGkIiqC4",
@@ -14,11 +14,20 @@ const firebaseConfig = {
   measurementId: "G-XZ84VZJD8V"
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterComponent />
   </React.StrictMode>
 );
+
+// async function FetchUsers() {
+//   const users = await getDocs(collection(db, 'users'));
+//   users.forEach((doc) => {
+//     console.log(doc.id, " => ", doc.data());
+//   });
+// }
+
+// FetchUsers();
