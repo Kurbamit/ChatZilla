@@ -8,7 +8,6 @@ function Login() {
     const { loginInfo, emailValidation, handleInputChange, handleLogIn } = useLoginForm();
 
     return (
-        <>
             <div className='login-box'>
                 <h2>LOGIN</h2>
                 <form>
@@ -62,7 +61,6 @@ function Login() {
                     </p>
                 </form>
             </div>
-        </>
     );
 }
 
