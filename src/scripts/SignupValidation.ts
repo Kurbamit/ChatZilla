@@ -1,4 +1,5 @@
 import { ValidateEmail } from "./EmailValidation";
+import { ValidateUsername } from "./UsernameValidation";
 
 let inputFieldsValidality = {
   isValidEmail: false,
@@ -7,10 +8,7 @@ let inputFieldsValidality = {
   isValidRepeatPassword: false,
 };
 
-export const handleFormSubmit = (
-  e: React.FormEvent<HTMLFormElement>,
-  email: string
-) => {
+export const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   PrintErrorMessages();
@@ -23,26 +21,61 @@ export const handleEmailChange = (
   inputFieldsValidality.isValidEmail = ValidateEmail(email);
   console.log("current email status: ", inputFieldsValidality.isValidEmail);
 
-  const input = inputFieldDiv?.querySelector("input");
-  if (input) {
-    input.style.borderBottom = inputFieldsValidality.isValidEmail
-      ? "1px solid green"
-      : "1px solid red";
-  }
+  ChangeUI(inputFieldsValidality.isValidEmail, inputFieldDiv);
+};
 
-  const label = inputFieldDiv?.querySelector("label");
-  if (label) {
-    label.style.color = inputFieldsValidality.isValidEmail ? "green" : "red";
-  }
+export const handleUsernameChange = (
+  username: string,
+  inputFieldDiv: HTMLDivElement | null
+) => {
+  inputFieldsValidality.isValidUsername = ValidateUsername(username);
+  console.log(
+    "current username status: ",
+    inputFieldsValidality.isValidUsername
+  );
+
+  ChangeUI(inputFieldsValidality.isValidUsername, inputFieldDiv);
 };
 
 function PrintErrorMessages() {
   const emailErrorDiv = document.getElementById("email-error");
-  if (emailErrorDiv) {
-    if (!inputFieldsValidality.isValidEmail) {
-      emailErrorDiv.textContent = "Please provide a valid email address";
+  const usernameErrorDiv = document.getElementById("username-error");
+
+  PrintErrorMessage(
+    inputFieldsValidality.isValidEmail,
+    "Please provide a valid email address",
+    emailErrorDiv
+  );
+
+  PrintErrorMessage(
+    inputFieldsValidality.isValidUsername,
+    "Username should be between 4 and 20 characters",
+    usernameErrorDiv
+  );
+}
+
+function PrintErrorMessage(
+  isValid: boolean,
+  errorMessage: string,
+  errorDiv: HTMLElement | null
+) {
+  if (errorDiv) {
+    if (!isValid) {
+      errorDiv.textContent = errorMessage;
     } else {
-      emailErrorDiv.textContent = "";
+      errorDiv.textContent = "";
     }
+  }
+}
+
+function ChangeUI(isValid: boolean, inputFieldDiv: HTMLDivElement | null) {
+  const input = inputFieldDiv?.querySelector("input");
+  if (input) {
+    input.style.borderBottom = isValid ? "1px solid green" : "1px solid red";
+  }
+
+  const label = inputFieldDiv?.querySelector("label");
+  if (label) {
+    label.style.color = isValid ? "green" : "red";
   }
 }

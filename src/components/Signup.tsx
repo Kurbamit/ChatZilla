@@ -2,26 +2,32 @@ import React, { useRef, useState } from "react";
 import {
   handleEmailChange,
   handleFormSubmit,
+  handleUsernameChange,
 } from "../scripts/SignupValidation";
 import "../styles/style.css";
 
 function Signup() {
   const [email, setEmail] = useState("");
-  const inputFieldDivRef = useRef<HTMLDivElement>(null);
+  const [username, setUsername] = useState("");
+  const inputFieldDivRefEmail = useRef<HTMLDivElement>(null);
+  const inputFieldDivRefUsername = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <div className="sign-up-box">
         <h2>SIGN-UP</h2>
-        <form onSubmit={(e) => handleFormSubmit(e, email)}>
-          <div ref={inputFieldDivRef} className="input-field">
+        <form onSubmit={(e) => handleFormSubmit(e)}>
+          <div ref={inputFieldDivRefEmail} className="input-field">
             <input
               id="input-email"
               type="text"
               name=""
               value={email}
               onChange={(e) => {
-                handleEmailChange(e.target.value, inputFieldDivRef.current);
+                handleEmailChange(
+                  e.target.value,
+                  inputFieldDivRefEmail.current
+                );
                 setEmail(e.target.value);
               }}
               required
@@ -29,8 +35,21 @@ function Signup() {
             <label id="input-email">Email</label>
             <div id="email-error" className="error-message"></div>
           </div>
-          <div className="input-field">
-            <input id="input-username" type="text" name="" required></input>
+          <div ref={inputFieldDivRefUsername} className="input-field">
+            <input
+              id="input-username"
+              type="text"
+              name=""
+              value={username}
+              onChange={(e) => {
+                handleUsernameChange(
+                  e.target.value,
+                  inputFieldDivRefUsername.current
+                );
+                setUsername(e.target.value);
+              }}
+              required
+            ></input>
             <label id="input-username">Username</label>
             <div id="username-error" className="error-message"></div>
           </div>
