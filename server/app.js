@@ -4,7 +4,11 @@ const app = express();
 const usersRoutes = require('./api/routes/usersRoutes');
 const { error } = require('console');
 
+const fetchUsers = require('./database');
+
 app.use('/users', usersRoutes)
+
+fetchUsers();
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
