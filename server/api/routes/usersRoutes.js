@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    res.status(200).json({
+    res.status(201).json({
         message: 'Handling POST requests to /users'
     });
 });
@@ -23,7 +23,7 @@ router.get('/:userId', (req, res, next) => {
 
 router.post('/:userId', (req, res, next) => {
     const id =  req.params.userId;
-    res.status(200).json({
+    res.status(201).json({
         message: 'Handling POST requests to /users/{userId}',
         userId: id
     })
